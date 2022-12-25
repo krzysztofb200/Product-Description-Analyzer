@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="note_title">#ff8000</color>
+    <color name="date_and_desc">#b3b3b3</color>
+    <color name="shopping_list_bg">#fcca97</color>
 </resources>

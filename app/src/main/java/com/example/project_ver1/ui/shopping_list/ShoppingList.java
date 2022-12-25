@@ -5,16 +5,20 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.project_ver1.AddShoppingListActivity;
 import com.example.project_ver1.R;
+import com.example.project_ver1.RVAdapter;
+import com.example.project_ver1.ShopListDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +26,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  * create an instance of this fragment.
  */
 public class ShoppingList extends Fragment {
+
+    RVAdapter rvAdapter;
+    ShopListDB db;
+    RecyclerView shopListView;
+    List<com.example.project_ver1.ShoppingList> lists;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +82,19 @@ public class ShoppingList extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        RecyclerView shopListView = (RecyclerView) view.findViewById(R.id.shopListView);
+
+        db = new ShopListDB(getContext());
+        lists = db.getLists();
+        db.close();
+        shopListView = (RecyclerView) view.findViewById(R.id.shopListView);
+        shopListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvAdapter = new RVAdapter(getContext(), lists);
+        shopListView.setAdapter(rvAdapter);
+
+
+//        displayList(lists);
+
+
         FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         // Po kliknieciu przycisku z plusem otwiera sie okno dodawania nowej listy zakupow
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -85,4 +106,10 @@ public class ShoppingList extends Fragment {
         });
 
     }
+
+//    private void displayList(List<ShoppingList> allLists) {
+//        shopListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        rvAdapter = new RVAdapter(getContext(), lists);
+//        shopListView.setAdapter(rvAdapter);
+//    }
 }
