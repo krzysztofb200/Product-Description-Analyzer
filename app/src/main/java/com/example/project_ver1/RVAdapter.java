@@ -1,12 +1,14 @@
 package com.example.project_ver1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -52,6 +54,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
             nTitle = itemView.findViewById(R.id.nTitle);
             nDate = itemView.findViewById(R.id.nDate);
             nTime = itemView.findViewById(R.id.nTime);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(),ListDetail.class);
+                    i.putExtra("ID",lists.get(getAdapterPosition()).getID());
+                    v.getContext().startActivity(i);
+                }
+            });
         }
     }
 }

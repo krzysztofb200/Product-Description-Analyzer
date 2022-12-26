@@ -11,8 +11,6 @@
     <string name="menu_gallery">Ostatnio dodane</string>
     <string name="menu_slideshow">Kategorie</string>
     <string name="menu_shopping_list">Lista zakupów</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shopping_list_name">Nazwij swoją listę zakupów</string>
     <string name="add_products">Dodaj produkty</string>
     <string name="new_shopping_list">Nowa lista zakupów</string>

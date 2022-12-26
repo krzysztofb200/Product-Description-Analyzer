@@ -46,7 +46,8 @@ public class AddShoppingListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ShoppingList shoppingList = new ShoppingList(noteTitle.getText().toString(), noteProducts.getText().toString(), today, currentTime);
                 ShopListDB db = new ShopListDB(AddShoppingListActivity.this);
-                db.addList(shoppingList);
+                long id = db.addList(shoppingList);
+                ShoppingList check = db.getList(id);
                 Toast.makeText(AddShoppingListActivity.this, "Saved", Toast.LENGTH_SHORT).show();
             }
         });

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,21 +80,31 @@ public class ShoppingList extends Fragment {
         return inflater.inflate(R.layout.fragment_shopping_list, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        lists.clear();
+        db = new ShopListDB(getContext());
+        lists = db.getLists();
+        db.close();
+        rvAdapter = new RVAdapter(getContext(), lists);
+        shopListView.setAdapter(rvAdapter);
+        rvAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
+        // Otwieranie bazy danych i pobieranie z niej wszystkich list
         db = new ShopListDB(getContext());
         lists = db.getLists();
         db.close();
+
+        // Dodawanie kazdej z list do widoku recycler view
         shopListView = (RecyclerView) view.findViewById(R.id.shopListView);
         shopListView.setLayoutManager(new LinearLayoutManager(getContext()));
         rvAdapter = new RVAdapter(getContext(), lists);
         shopListView.setAdapter(rvAdapter);
-
-
-//        displayList(lists);
-
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         // Po kliknieciu przycisku z plusem otwiera sie okno dodawania nowej listy zakupow
@@ -104,12 +115,5 @@ public class ShoppingList extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
-
-//    private void displayList(List<ShoppingList> allLists) {
-//        shopListView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        rvAdapter = new RVAdapter(getContext(), lists);
-//        shopListView.setAdapter(rvAdapter);
-//    }
 }

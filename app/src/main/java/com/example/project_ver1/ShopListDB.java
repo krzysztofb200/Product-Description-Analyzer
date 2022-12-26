@@ -32,7 +32,7 @@ public class ShopListDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Tworzenie tabeli w bazie danych
-        String query = "CREATE TABLE " + DATABASE_TABLE + " (" + KEY_ID + " INT PRIMARY KEY, " +
+        String query = "CREATE TABLE " + DATABASE_TABLE + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 KEY_TITLE + " TEXT, " +
                 KEY_CONTENT + " TEXT, " +
                 KEY_DATE + " TEXT, " +
@@ -69,16 +69,18 @@ public class ShopListDB extends SQLiteOpenHelper {
     }
 
     public ShoppingList getList(long id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null);
-
-        if(cursor != null){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] query = new String[] {KEY_ID,KEY_TITLE,KEY_CONTENT,KEY_DATE,KEY_TIME};
+        Cursor cursor=  db.query(DATABASE_TABLE,query,KEY_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
+        if(cursor != null)
             cursor.moveToFirst();
-        }
 
-        ShoppingList shoppingList = new ShoppingList(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-        return  shoppingList;
+        return new ShoppingList(
+                Long.parseLong(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
     }
 
     public List<ShoppingList> getLists(){
@@ -88,14 +90,6 @@ public class ShopListDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             do {
-//                ShoppingList shoppingList = new ShoppingList();
-//                shoppingList.setID(cursor.getLong(0));
-//                shoppingList.setTitle(cursor.getString(1));
-//                shoppingList.setContent(cursor.getString(2));
-//                shoppingList.setDate(cursor.getString(3));
-//                shoppingList.setTime(cursor.getString(4));
-//                allLists.add(shoppingList);
-
                 long id = cursor.getLong(0);
                 String title = cursor.getString(1);
                 String content = cursor.getString(2);
@@ -109,6 +103,12 @@ public class ShopListDB extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return allLists;
+    }
+
+    void deleteNote(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DATABASE_TABLE,KEY_ID+"=?",new String[]{String.valueOf(id)});
+        db.close();
     }
 
 }
