@@ -2,23 +2,18 @@ package com.example.project_ver1.ui.shopping_list;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.project_ver1.AddShoppingListActivity;
 import com.example.project_ver1.R;
 import com.example.project_ver1.RVAdapter;
 import com.example.project_ver1.ShopListDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 /**

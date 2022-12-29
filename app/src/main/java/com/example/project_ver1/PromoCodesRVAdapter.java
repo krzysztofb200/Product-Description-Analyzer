@@ -1,6 +1,5 @@
 package com.example.project_ver1;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,17 +28,17 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
         // Add firstname from model class (here
         // "person.class")to appropriate view in Card
         // view (here "person.xml")
-        holder.firstname.setText(model.getFirstname());
+        holder.brand.setText(model.getBrand());
 
         // Add lastname from model class (here
         // "person.class")to appropriate view in Card
         // view (here "person.xml")
-        holder.lastname.setText(model.getLastname());
+        holder.code.setText(model.getCode());
 
         // Add age from model class (here
         // "person.class")to appropriate view in Card
         // view (here "person.xml")
-        holder.age.setText(model.getAge());
+        holder.expires.setText(model.getExpires());
 
         String link = model.getImage();
         Picasso.get().load(link).into(PromoCodesViewHolder.rImage);
@@ -60,14 +59,14 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
     // Sub Class to create references of the views in Crad
     // view (here "person.xml")
     public static class PromoCodesViewHolder extends RecyclerView.ViewHolder {
-        TextView firstname, lastname, age;
+        TextView brand, code, expires;
         static ImageView rImage;
         public PromoCodesViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            firstname = itemView.findViewById(R.id.firstname);
-            lastname = itemView.findViewById(R.id.lastname);
-            age = itemView.findViewById(R.id.age);
+            brand = itemView.findViewById(R.id.brand);
+            code = itemView.findViewById(R.id.code);
+            expires = itemView.findViewById(R.id.expires);
             rImage = (ImageView) itemView.findViewById(R.id.rImage);
         }
     }

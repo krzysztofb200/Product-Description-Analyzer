@@ -3,15 +3,15 @@ package com.example.project_ver1;
 public class PromoCodes {
     // Variable to store data corresponding
     // to firstname keyword in database
-    private String firstname;
+    private String brand;
 
     // Variable to store data corresponding
     // to lastname keyword in database
-    private String lastname;
+    private String code;
 
     // Variable to store data corresponding
     // to age keyword in database
-    private String age;
+    private String expires;
 
     private String image;
 
@@ -20,29 +20,29 @@ public class PromoCodes {
     public PromoCodes() {}
 
     // Getter and setter method
-    public String getFirstname()
+    public String getBrand()
     {
-        return firstname;
+        return brand;
     }
-    public void setFirstname(String firstname)
+    public void setBrand(String brand)
     {
-        this.firstname = firstname;
+        this.brand = brand;
     }
-    public String getLastname()
+    public String getCode()
     {
-        return lastname;
+        return code;
     }
-    public void setLastname(String lastname)
+    public void setCode(String code)
     {
-        this.lastname = lastname;
+        this.code = code;
     }
-    public String getAge()
+    public String getExpires()
     {
-        return age;
+        return expires;
     }
-    public void setAge(String age)
+    public void setExpires(String expires)
     {
-        this.age = age;
+        this.expires = expires;
     }
     public String getImage() {
         return image;
