@@ -19,5 +19,8 @@
         <item
             android:id="@+id/nav_shopping_list"
             android:title="@string/menu_shopping_list"/>
+        <item
+            android:id="@+id/nav_promo_codes"
+            android:title="@string/menu_promo_codes"/>
     </group>
 </menu>

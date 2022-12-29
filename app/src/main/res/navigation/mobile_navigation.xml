@@ -27,4 +27,9 @@
         android:name="com.example.project_ver1.ui.shopping_list.ShoppingList"
         android:label="@string/menu_shopping_list"
         tools:layout="@layout/fragment_shopping_list" />
+    <fragment
+        android:id="@+id/nav_promo_codes"
+        android:name="com.example.project_ver1.ui.promo_codes.PromoCodesFragment"
+        android:label="@string/menu_promo_codes"
+        tools:layout="@layout/fragment_promo_codes" />
 </navigation>
