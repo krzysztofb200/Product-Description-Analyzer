@@ -13,6 +13,8 @@ public class PromoCodes {
     // to age keyword in database
     private String age;
 
+    private String image;
+
     // Mandatory empty constructor
     // for use of FirebaseUI
     public PromoCodes() {}
@@ -41,5 +43,11 @@ public class PromoCodes {
     public void setAge(String age)
     {
         this.age = age;
+    }
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 }
