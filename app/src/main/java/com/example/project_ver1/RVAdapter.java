@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import java.util.List;
@@ -64,6 +63,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(),ListDetail.class);
+                    i.putExtra("ID",lists.get(getAdapterPosition()).getID());
+                    v.getContext().startActivity(i);
+                }
+            });
+
+            itemView.findViewById(R.id.btnEdit).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(),ListEdit.class);
                     i.putExtra("ID",lists.get(getAdapterPosition()).getID());
                     v.getContext().startActivity(i);
                 }

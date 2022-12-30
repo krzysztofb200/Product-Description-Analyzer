@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -30,8 +33,11 @@ public class ListEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_edit);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
         id = i.getLongExtra("ID",0);
@@ -50,7 +56,7 @@ public class ListEdit extends AppCompatActivity {
         c = Calendar.getInstance();
         todaysDate = c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH);
         Log.d("DATE", "Date: " + todaysDate);
-        currentTime = pad(c.get(Calendar.HOUR)) + ":" + pad(c.get(Calendar.MINUTE));
+        currentTime = pad(c.get(Calendar.HOUR_OF_DAY) + 1) + ":" + pad(c.get(Calendar.MINUTE));
         Log.d("TIME", "Time: " + currentTime);
 
         FloatingActionButton fabListSaveChanges = findViewById(R.id.fabListSaveChanges);
@@ -68,37 +74,25 @@ public class ListEdit extends AppCompatActivity {
         });
     }
 
-
     private String pad(int time) {
         if (time < 10)
             return "0" + time;
         return String.valueOf(time);
-
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.save_menu, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.save) {
-//            ShoppingList shoppingList = new ShoppingList(nId, nTitle.getText().toString(), nContent.getText().toString(), todaysDate, currentTime);
-//            Log.d("EDITED", "edited: before saving id -> " + shoppingList.getID());
-//            ShopListDB sDB = new ShopListDB(getApplicationContext());
-//            long id = sDB.editNote(shoppingList);
-//            Log.d("EDITED", "EDIT: id " + id);
-//            goToMain();
-//            Toast.makeText(this, "Note Edited.", Toast.LENGTH_SHORT).show();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    // Opcja pozwalajaca cofnac sie do poprzedniego okna (wszystkie listy zakupow)
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void goToMain() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, com.example.project_ver1.ui.shopping_list.ShoppingList.class);
         startActivity(i);
     }
 }
