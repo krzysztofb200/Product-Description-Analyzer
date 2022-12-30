@@ -40,6 +40,7 @@ public class ListDetail extends AppCompatActivity {
         setTitle(shoppingList.getTitle());
 
         FloatingActionButton fabListContentDetail = findViewById(R.id.fabListContentDetail);
+        FloatingActionButton fabListEdit = findViewById(R.id.fabListEdit);
         fabListContentDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +48,14 @@ public class ListDetail extends AppCompatActivity {
                 db.deleteNote(id);
                 Toast.makeText(getApplicationContext(),"Lista usunięta",Toast.LENGTH_SHORT).show();
                 goToMain();
+            }
+        });
+
+        fabListEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ListEdit.class);
+                startActivity(i);
             }
         });
     }
@@ -67,3 +76,4 @@ public class ListDetail extends AppCompatActivity {
         startActivity(i);
     }
 }
+

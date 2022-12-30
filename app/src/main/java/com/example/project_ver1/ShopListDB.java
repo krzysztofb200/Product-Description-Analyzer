@@ -105,6 +105,17 @@ public class ShopListDB extends SQLiteOpenHelper {
         return allLists;
     }
 
+    public int editNote(ShoppingList list){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues c = new ContentValues();
+        Log.d("Edited", "Edited Title: -> "+ list.getTitle() + "\n ID -> "+list.getID());
+        c.put(KEY_TITLE,list.getTitle());
+        c.put(KEY_CONTENT,list.getContent());
+        c.put(KEY_DATE,list.getDate());
+        c.put(KEY_TIME,list.getTime());
+        return db.update(DATABASE_TABLE,c,KEY_ID+"=?",new String[]{String.valueOf(list.getID())});
+    }
+
     void deleteNote(long id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DATABASE_TABLE,KEY_ID+"=?",new String[]{String.valueOf(id)});
