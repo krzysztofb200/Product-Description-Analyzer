@@ -108,6 +108,22 @@ public class PromoCodesFragment extends Fragment {
         adapter.startListening();
     }
 
+    public void onResume(){
+        super.onResume();
+        mbase = FirebaseDatabase.getInstance().getReference();
+
+        // To display the Recycler view linearly
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        FirebaseRecyclerOptions<PromoCodes> options
+                = new FirebaseRecyclerOptions.Builder<PromoCodes>()
+                .setQuery(mbase, PromoCodes.class)
+                .build();
+        adapter = new PromoCodesRVAdapter(options);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+    }
+
     // Function to tell the app to stop getting
     // data from database on stopping of the activity
     @Override

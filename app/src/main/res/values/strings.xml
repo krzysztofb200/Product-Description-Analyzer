@@ -19,5 +19,7 @@
     <string name="code_brand">Brand</string>
     <string name="code">Code</string>
     <string name="code_expires">Code expires</string>
+    <string name="code_description">Description</string>
+    <string name="code_website">Website</string>
     <string name="list_detail_edit">Edytuj</string>
 </resources>

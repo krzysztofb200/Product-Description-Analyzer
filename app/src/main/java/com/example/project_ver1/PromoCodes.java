@@ -1,6 +1,7 @@
 package com.example.project_ver1;
 
 public class PromoCodes {
+    private String id;
     // Variable to store data corresponding
     // to firstname keyword in database
     private String brand;
@@ -15,11 +16,15 @@ public class PromoCodes {
 
     private String image;
 
+    private String desc;
+
     // Mandatory empty constructor
     // for use of FirebaseUI
     public PromoCodes() {}
 
     // Getter and setter method
+    public String getID() {return id;}
+    public void setID(String id) {this.id = id;}
     public String getBrand()
     {
         return brand;
@@ -50,4 +55,6 @@ public class PromoCodes {
     public void setImage(String image) {
         this.image = image;
     }
+    public String getDesc() {return desc;}
+    public void setDesc(String desc) {this.desc = desc;}
 }

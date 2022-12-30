@@ -1,10 +1,13 @@
 package com.example.project_ver1;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, PromoCodesRVAdapter.PromoCodesViewHolder> {
     public PromoCodesRVAdapter(@NonNull FirebaseRecyclerOptions<PromoCodes> options) {
@@ -40,6 +45,8 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
         // view (here "person.xml")
         holder.expires.setText(model.getExpires());
 
+        holder.id.setText(model.getID());
+
         String link = model.getImage();
         Picasso.get().load(link).into(PromoCodesViewHolder.rImage);
     }
@@ -59,15 +66,27 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
     // Sub Class to create references of the views in Crad
     // view (here "person.xml")
     public static class PromoCodesViewHolder extends RecyclerView.ViewHolder {
-        TextView brand, code, expires;
+        TextView brand, code, expires, id;
         static ImageView rImage;
-        public PromoCodesViewHolder(@NonNull View itemView)
-        {
+        public PromoCodesViewHolder(@NonNull View itemView) {
             super(itemView);
             brand = itemView.findViewById(R.id.brand);
             code = itemView.findViewById(R.id.code);
             expires = itemView.findViewById(R.id.expires);
             rImage = (ImageView) itemView.findViewById(R.id.rImage);
+            id = itemView.findViewById(R.id.id);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), PromoCodesDetail.class);
+                    i.putExtra("ID",id.getText().toString());
+                    i.putExtra("Brand", brand.getText().toString());
+                    i.putExtra("Code", code.getText().toString());
+                    i.putExtra("Expires", expires.getText().toString());
+                    v.getContext().startActivity(i);
+                }
+            });
         }
     }
 }
