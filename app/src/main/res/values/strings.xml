@@ -6,7 +6,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Wyszukaj produkt</string>
     <string name="menu_gallery">Ostatnio dodane</string>
     <string name="menu_slideshow">Kategorie</string>
@@ -23,4 +22,12 @@
     <string name="code_website">Website</string>
     <string name="list_detail_edit">Edytuj</string>
     <string name="link_detail">Link</string>
+    <string name="register_question">Nie masz konta? Zarejestruj się.</string>
+    <string name="login_question">Masz już konto? Zaloguj się.</string>
+    <string name="login">Zaloguj się</string>
+    <string name="register">Zarejestruj się</string>
+    <string name="email">Wpisz email</string>
+    <string name="password">Wpisz hasło</string>
+    <string name="confirm_password">Potwierdź hasło</string>
+    <string name="username">Wpisz nazwę użytkownika</string>
 </resources>
