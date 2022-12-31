@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import java.util.Set;
 
 public class PromoCodesDetail extends AppCompatActivity {
     DatabaseReference mbase;
-    TextView brand_detail, expires_detail, code_detail, description_detail;
+    TextView brand_detail, expires_detail, code_detail, description_detail, link_detail;
     ImageView image_detail;
     //String image_link;
 
@@ -34,7 +35,9 @@ public class PromoCodesDetail extends AppCompatActivity {
         expires_detail = findViewById(R.id.expires_detail);
         code_detail = findViewById(R.id.code_detail);
         description_detail = findViewById(R.id.description_detail);
+        link_detail = findViewById(R.id.link_detail);
         image_detail = (ImageView) findViewById(R.id.image_detail);
+        link_detail.setMovementMethod(LinkMovementMethod.getInstance());
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -53,7 +56,7 @@ public class PromoCodesDetail extends AppCompatActivity {
         expires_detail.setText(expires);
         code_detail.setText(code);
 
-        mbase = FirebaseDatabase.getInstance().getReference();
+        mbase = FirebaseDatabase.getInstance().getReference().child("promo_codes");
 
         mbase.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -62,10 +65,13 @@ public class PromoCodesDetail extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                 {
-                    description_detail.setText(dataSnapshot1.child("description").getValue().toString());
+                    description_detail.setText(dataSnapshot1.child("desc").getValue().toString());
+
                     String image_link = dataSnapshot1.child("image").getValue().toString();
                     Log.d("Image", "Image url: " + dataSnapshot1.child("image").getValue().toString());
                     Picasso.get().load(image_link).into(image_detail);
+
+                    link_detail.setText(dataSnapshot1.child("link").getValue().toString());
                 }
             }
 
@@ -74,9 +80,6 @@ public class PromoCodesDetail extends AppCompatActivity {
 
             }
         });
-
-
-        //Picasso.get().load(image_link).into();
     }
 
     // Opcja pozwalajaca cofnac sie do poprzedniego okna (wszystkie listy zakupow)

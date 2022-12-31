@@ -22,4 +22,5 @@
     <string name="code_description">Description</string>
     <string name="code_website">Website</string>
     <string name="list_detail_edit">Edytuj</string>
+    <string name="link_detail">Link</string>
 </resources>

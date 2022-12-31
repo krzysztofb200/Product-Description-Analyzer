@@ -81,7 +81,7 @@ public class PromoCodesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         // Create a instance of the database and get
         // its reference
-        mbase = FirebaseDatabase.getInstance().getReference();
+        mbase = FirebaseDatabase.getInstance().getReference().child("promo_codes");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler1);
 
@@ -110,7 +110,7 @@ public class PromoCodesFragment extends Fragment {
 
     public void onResume(){
         super.onResume();
-        mbase = FirebaseDatabase.getInstance().getReference();
+        mbase = FirebaseDatabase.getInstance().getReference().child("promo_codes");
 
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
