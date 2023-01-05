@@ -32,4 +32,10 @@
         android:name="com.example.project_ver1.ui.promo_codes.PromoCodesFragment"
         android:label="@string/menu_promo_codes"
         tools:layout="@layout/fragment_promo_codes" />
+
+    <fragment
+        android:id="@+id/nav_all_products"
+        android:name="com.example.project_ver1.ui.all_products.AllProductsFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_all_products" />
 </navigation>
