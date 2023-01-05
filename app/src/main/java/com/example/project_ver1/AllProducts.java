@@ -4,6 +4,14 @@ public class AllProducts {
 
     public AllProducts(){}
 
+    public AllProducts(String name, String bar_code, String desc, String id, String image) {
+        this.name = name;
+        this.bar_code = bar_code;
+        this.desc = desc;
+        this.id = id;
+        this.image = image;
+    }
+
     public String getID() {
         return id;
     }

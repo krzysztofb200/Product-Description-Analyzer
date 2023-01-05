@@ -10,6 +10,7 @@
     <string name="menu_gallery">Ostatnio dodane</string>
     <string name="menu_slideshow">Kategorie</string>
     <string name="menu_shopping_list">Lista zakupów</string>
+    <string name="menu_add_product">Dodaj produkt</string>
     <string name="shopping_list_name">Nazwij swoją listę zakupów</string>
     <string name="add_products">Dodaj produkty</string>
     <string name="new_shopping_list">Nowa lista zakupów</string>
@@ -31,4 +32,10 @@
     <string name="confirm_password">Potwierdź hasło</string>
     <string name="username">Wpisz nazwę użytkownika</string>
     <string name="bar_code">Kod kreskowy</string>
+    <string name="product_name">Nazwa produktu</string>
+    <string name="product_desc">Opis produktu</string>
+    <string name="product_image">Zdjęcie produktu</string>
+    <string name="product_link">Link produktu</string>
+    <string name="product_id">ID produktu</string>
+    <string name="add_product">Dodaj produkt</string>
 </resources>
