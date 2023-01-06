@@ -1,16 +1,16 @@
 package com.example.project_ver1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,13 +28,21 @@ public class AddProductActivity extends AppCompatActivity {
     // creating a variable for
     // our object class
     AllProducts allProducts;
-    EditText etProductName, etProductDescription, etBarCode, etProductImage, etProductID;
+    EditText etProductName, etProductDescription, etBarCode, etProductImage;
+    TextView etProductID;
     Button btnAddProduct;
+    int numberOfProducts = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle(getResources().getString(R.string.add_products));
 
         etBarCode = findViewById(R.id.etBarCode);
         etProductDescription = findViewById(R.id.etProductDescription);
@@ -51,6 +59,19 @@ public class AddProductActivity extends AppCompatActivity {
         // initializing our object
         // class variable.
         allProducts = new AllProducts();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                numberOfProducts = (int) snapshot.getChildrenCount();
+                etProductID.setText(Integer.toString(numberOfProducts + 1));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(AddProductActivity.this, "Nie udalo sie obliczyc liczby produktow", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +92,7 @@ public class AddProductActivity extends AppCompatActivity {
                     // else call the method to add
                     // data to our database.
                     addDatatoFirebase(name, bar_code, desc, id, image);
+                    onBackPressed();
                 }
             }
         });
@@ -108,17 +130,13 @@ public class AddProductActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mAuth.addAuthStateListener(mAuthListener);
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        if (mAuthListener != null) {
-//            mAuth.removeAuthStateListener(mAuthListener);
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

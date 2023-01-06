@@ -98,9 +98,11 @@ public class MainActivity extends AppCompatActivity {
         navEmail.setText(email);
 
         // Ukrycie jednego z elementow navigation drawer
-//        navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        Menu nav_Menu = navigationView.getMenu();
-//        nav_Menu.findItem(R.id.nav_shopping_list).setVisible(false);
+        if(!email.equals("test@test.pl")) {
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_add_product).setVisible(false);
+        }
 
         // TODO: Logout button, add product activity visible only for logged users, add product to favorites
     }
