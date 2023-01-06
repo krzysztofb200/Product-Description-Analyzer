@@ -104,7 +104,7 @@ public class AllProductsFragment extends Fragment {
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<AllProducts> options
                 = new FirebaseRecyclerOptions.Builder<AllProducts>()
-                .setQuery(mbase, AllProducts.class)
+                .setQuery(mbase.orderByChild("id"), AllProducts.class)
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
@@ -128,7 +128,7 @@ public class AllProductsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FirebaseRecyclerOptions<AllProducts> options
                 = new FirebaseRecyclerOptions.Builder<AllProducts>()
-                .setQuery(mbase, AllProducts.class)
+                .setQuery(mbase.orderByChild("id"), AllProducts.class)
                 .build();
         adapter = new AllProductsRVAdapter(options);
         recyclerView.setAdapter(adapter);
