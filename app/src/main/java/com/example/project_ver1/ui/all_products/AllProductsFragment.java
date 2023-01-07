@@ -1,5 +1,6 @@
 package com.example.project_ver1.ui.all_products;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -14,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.project_ver1.AllProducts;
 import com.example.project_ver1.AllProductsRVAdapter;
+import com.example.project_ver1.BarcodeScannerActivity;
 import com.example.project_ver1.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,6 +35,7 @@ public class AllProductsFragment extends Fragment {
      * create an instance of this fragment.
      */
 
+    private FloatingActionButton fabBarcode;
     private RecyclerView recyclerView;
     AllProductsRVAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
@@ -88,6 +92,15 @@ public class AllProductsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         setHasOptionsMenu(true);
+
+        fabBarcode = view.findViewById(R.id.fabBarcode);
+        fabBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), BarcodeScannerActivity.class);
+                startActivity(i);
+            }
+        });
 
         // Create a instance of the database and get
         // its reference
