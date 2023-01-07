@@ -3,11 +3,16 @@ package com.example.project_ver1.ui.all_products;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,6 +39,7 @@ public class AllProductsFragment extends Fragment {
      * create an instance of this fragment.
      */
 
+    //SearchView searchView;
     private RecyclerView recyclerView;
     AllProductsRVAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
@@ -80,6 +86,7 @@ public class AllProductsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -91,6 +98,8 @@ public class AllProductsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+        setHasOptionsMenu(true);
+
         // Create a instance of the database and get
         // its reference
         mbase = FirebaseDatabase.getInstance().getReference().child("products");
@@ -111,6 +120,36 @@ public class AllProductsFragment extends Fragment {
         adapter = new AllProductsRVAdapter(options);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.actionSearch);
+
+        // getting search view of our item.
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                FirebaseRecyclerOptions<AllProducts> options
+                        = new FirebaseRecyclerOptions.Builder<AllProducts>()
+                        .setQuery(mbase.orderByChild("name").startAt(newText).endAt(newText + "\uf8ff"), AllProducts.class)
+                        .build();
+                adapter = new AllProductsRVAdapter(options);
+                recyclerView.setAdapter(adapter);
+                adapter.startListening();
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     @Override
