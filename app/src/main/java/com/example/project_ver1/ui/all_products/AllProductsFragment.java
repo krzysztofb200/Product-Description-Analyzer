@@ -1,27 +1,20 @@
 package com.example.project_ver1.ui.all_products;
 
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.project_ver1.AllProducts;
 import com.example.project_ver1.AllProductsRVAdapter;
-import com.example.project_ver1.PromoCodes;
-import com.example.project_ver1.PromoCodesRVAdapter;
 import com.example.project_ver1.R;
-import com.example.project_ver1.ui.promo_codes.PromoCodesFragment;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,14 +32,10 @@ public class AllProductsFragment extends Fragment {
      * create an instance of this fragment.
      */
 
-    //SearchView searchView;
     private RecyclerView recyclerView;
     AllProductsRVAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
     // Firebase Realtime Database
-
-    // Initializing the ImageView
-    //ImageView rImage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
