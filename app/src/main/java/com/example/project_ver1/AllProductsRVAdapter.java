@@ -39,7 +39,7 @@ public class AllProductsRVAdapter extends FirebaseRecyclerAdapter<AllProducts, A
         holder.id.setText(model.getID());
 
         String link = model.getImage();
-        Picasso.get().load(link).into(AllProductsRVAdapter.AllProductsViewHolder.rImage);
+        Picasso.get().load(link).fit().centerCrop().into(AllProductsRVAdapter.AllProductsViewHolder.rImage);
     }
 
     // Function to tell the class about the Card view (here
