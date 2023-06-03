@@ -4,8 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
 public class AddProductActivity extends AppCompatActivity {
@@ -45,6 +49,9 @@ public class AddProductActivity extends AppCompatActivity {
     Button btnAddProduct, btnAddPhoto;
     Uri imageUri;
     ImageView ivProductImage;
+    Bitmap bmp;
+    ByteArrayOutputStream baos;
+    byte[] byteArray;
     int numberOfProducts = 0;
 
     @Override
@@ -115,7 +122,7 @@ public class AddProductActivity extends AppCompatActivity {
         final String randomUUID = UUID.randomUUID().toString();
         StorageReference riversRef = storageReference.child(randomUUID);
 
-        riversRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        riversRef.putBytes(byteArray).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -152,6 +159,21 @@ public class AddProductActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null){
             imageUri = data.getData();
+            //creating byte array of photo to compress it
+            bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            baos = new ByteArrayOutputStream();
+
+            // here we can choose quality factor
+            // in third parameter(ex. here it is 25)
+            bmp.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+
+            byteArray = baos.toByteArray();
+
             ivProductImage.setImageURI(imageUri);
         }
     }
