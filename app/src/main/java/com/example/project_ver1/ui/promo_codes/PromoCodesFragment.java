@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.project_ver1.PromoCodes;
-import com.example.project_ver1.PromoCodesRVAdapter;
+
 import com.example.project_ver1.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;

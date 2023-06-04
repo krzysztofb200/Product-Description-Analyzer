@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.example.project_ver1.ui.all_products.AllProductsFragment;
+import com.example.project_ver1.ui.all_products.AllProducts;
+import com.example.project_ver1.ui.all_products.AllProductsRVAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

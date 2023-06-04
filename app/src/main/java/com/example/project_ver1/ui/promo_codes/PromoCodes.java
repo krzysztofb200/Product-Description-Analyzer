@@ -1,4 +1,4 @@
-package com.example.project_ver1;
+package com.example.project_ver1.ui.promo_codes;
 
 public class PromoCodes {
     private String id;

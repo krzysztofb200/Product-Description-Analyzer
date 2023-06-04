@@ -1,5 +1,8 @@
-package com.example.project_ver1;
+package com.example.project_ver1.ui.promo_codes;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -8,10 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.project_ver1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,23 +19,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class AllProductsDetail extends AppCompatActivity {
+import java.util.Set;
+
+public class PromoCodesDetail extends AppCompatActivity {
     DatabaseReference mbase;
-    TextView name_detail, code_detail, description_detail, link_detail;
+    TextView brand_detail, expires_detail, code_detail, description_detail, link_detail;
     ImageView image_detail;
     //String image_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_products_detail);
+        setContentView(R.layout.activity_promo_codes_detail);
 
-        name_detail = findViewById(R.id.name_detail);
+        brand_detail = findViewById(R.id.brand_detail);
+        expires_detail = findViewById(R.id.expires_detail);
         code_detail = findViewById(R.id.code_detail);
         description_detail = findViewById(R.id.description_detail);
-//        link_detail = findViewById(R.id.link_detail);
+        link_detail = findViewById(R.id.link_detail);
         image_detail = (ImageView) findViewById(R.id.image_detail);
-//        link_detail.setMovementMethod(LinkMovementMethod.getInstance());
+        link_detail.setMovementMethod(LinkMovementMethod.getInstance());
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -45,14 +48,16 @@ public class AllProductsDetail extends AppCompatActivity {
         Intent i = getIntent();
         String id = i.getStringExtra("ID");
         Log.d("ID", "ID: " + id);
-        String name = i.getStringExtra("Name");
+        String brand = i.getStringExtra("Brand");
+        String expires = i.getStringExtra("Expires");
         String code = i.getStringExtra("Code");
-        setTitle(name);
+        setTitle(brand);
 
-        name_detail.setText(name);
+        brand_detail.setText(brand);
+        expires_detail.setText(expires);
         code_detail.setText(code);
 
-        mbase = FirebaseDatabase.getInstance().getReference().child("products");
+        mbase = FirebaseDatabase.getInstance().getReference().child("promo_codes");
 
         mbase.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -67,7 +72,7 @@ public class AllProductsDetail extends AppCompatActivity {
                     Log.d("Image", "Image url: " + dataSnapshot1.child("image").getValue().toString());
                     Picasso.get().load(image_link).into(image_detail);
 
-//                    link_detail.setText(dataSnapshot1.child("link").getValue().toString());
+                    link_detail.setText(dataSnapshot1.child("link").getValue().toString());
                 }
             }
 

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!--    <uses-feature> is added by android studio-->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -62,14 +67,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PromoCodesDetail"
+            android:name=".ui.promo_codes.PromoCodesDetail"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AllProductsDetail"
+            android:name=".ui.all_products.AllProductsDetail"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

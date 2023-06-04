@@ -1,25 +1,22 @@
-package com.example.project_ver1;
+package com.example.project_ver1.ui.all_products;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_ver1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, PromoCodesRVAdapter.PromoCodesViewHolder> {
-    public PromoCodesRVAdapter(@NonNull FirebaseRecyclerOptions<PromoCodes> options) {
+public class AllProductsRVAdapter extends FirebaseRecyclerAdapter<AllProducts, AllProductsRVAdapter.AllProductsViewHolder> {
+    public AllProductsRVAdapter(@NonNull FirebaseRecyclerOptions<AllProducts> options) {
         super(options);
     }
 
@@ -27,28 +24,23 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
     // "person.xml") iwth data in
     // model class(here "person.class")
     @Override
-    protected void onBindViewHolder(@NonNull PromoCodesViewHolder holder,
-                     int position, @NonNull PromoCodes model) {
+    protected void onBindViewHolder(@NonNull AllProductsRVAdapter.AllProductsViewHolder holder,
+                                    int position, @NonNull AllProducts model) {
 
         // Add firstname from model class (here
         // "person.class")to appropriate view in Card
         // view (here "person.xml")
-        holder.brand.setText(model.getBrand());
+        holder.name.setText(model.getName());
 
         // Add lastname from model class (here
         // "person.class")to appropriate view in Card
         // view (here "person.xml")
-        holder.code.setText(model.getCode());
-
-        // Add age from model class (here
-        // "person.class")to appropriate view in Card
-        // view (here "person.xml")
-        holder.expires.setText(model.getExpires());
+        holder.bar_code.setText(model.getBar_code());
 
         holder.id.setText(model.getID());
 
         String link = model.getImage();
-        Picasso.get().load(link).into(PromoCodesViewHolder.rImage);
+        Picasso.get().load(link).fit().centerCrop().into(AllProductsRVAdapter.AllProductsViewHolder.rImage);
     }
 
     // Function to tell the class about the Card view (here
@@ -56,37 +48,36 @@ public class PromoCodesRVAdapter extends FirebaseRecyclerAdapter<PromoCodes, Pro
     // which the data will be shown
     @NonNull
     @Override
-    public PromoCodesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public AllProductsRVAdapter.AllProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.custom_promo_codes_list_view, parent, false);
-        return new PromoCodesViewHolder(view);
+                .inflate(R.layout.custom_all_products_list_view, parent, false);
+        return new AllProductsRVAdapter.AllProductsViewHolder(view);
     }
 
     // Sub Class to create references of the views in Crad
     // view (here "person.xml")
-    public static class PromoCodesViewHolder extends RecyclerView.ViewHolder {
-        TextView brand, code, expires, id;
+    public static class AllProductsViewHolder extends RecyclerView.ViewHolder {
+        TextView name, bar_code, id;
         static ImageView rImage;
-        public PromoCodesViewHolder(@NonNull View itemView) {
+        public AllProductsViewHolder(@NonNull View itemView) {
             super(itemView);
-            brand = itemView.findViewById(R.id.brand);
-            code = itemView.findViewById(R.id.code);
-            expires = itemView.findViewById(R.id.expires);
+            name = itemView.findViewById(R.id.brand);
+            bar_code = itemView.findViewById(R.id.code);
             rImage = (ImageView) itemView.findViewById(R.id.rImage);
             id = itemView.findViewById(R.id.id);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), PromoCodesDetail.class);
+                    Intent i = new Intent(v.getContext(), AllProductsDetail.class);
                     i.putExtra("ID",id.getText().toString());
-                    i.putExtra("Brand", brand.getText().toString());
-                    i.putExtra("Code", code.getText().toString());
-                    i.putExtra("Expires", expires.getText().toString());
+                    i.putExtra("Name", name.getText().toString());
+                    i.putExtra("Code", bar_code.getText().toString());
                     v.getContext().startActivity(i);
                 }
             });
         }
     }
 }
+

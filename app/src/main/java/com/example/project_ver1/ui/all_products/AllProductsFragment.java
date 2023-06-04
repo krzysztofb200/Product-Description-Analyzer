@@ -13,8 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.project_ver1.AllProducts;
-import com.example.project_ver1.AllProductsRVAdapter;
+
 import com.example.project_ver1.BarcodeScannerActivity;
 import com.example.project_ver1.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

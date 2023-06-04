@@ -1,4 +1,4 @@
-package com.example.project_ver1;
+package com.example.project_ver1.ui.all_products;
 
 public class AllProducts {
 
