@@ -27,6 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setTitle("Rejestracja");
 
         // taking FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
@@ -58,9 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void registerNewUser()
-    {
-
+    private void registerNewUser(){
         // show the visibility of progress bar to show loading
         progressbar.setVisibility(View.VISIBLE);
 
@@ -74,51 +73,40 @@ public class RegistrationActivity extends AppCompatActivity {
         // Validations for input email and password
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(getApplicationContext(),
-                            "Please enter username!!",
-                            Toast.LENGTH_LONG)
-                    .show();
+                            "Wpisz nazwę użytkownika", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(),
-                            "Please enter email!!",
-                            Toast.LENGTH_LONG)
-                    .show();
+                            "Wpisz adres email", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(),
-                            "Please enter password!!",
-                            Toast.LENGTH_LONG)
-                    .show();
+                            "Wpisz hasło", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(confPasswd)) {
             Toast.makeText(getApplicationContext(),
-                            "Please confirm password!!",
-                            Toast.LENGTH_LONG)
-                    .show();
+                            "Potwierdź hasło", Toast.LENGTH_LONG).show();
             return;
         }
         if (!password.equals(confPasswd)) {
             Toast.makeText(getApplicationContext(),
-                            "Password doesn't match!!",
-                            Toast.LENGTH_LONG)
-                    .show();
+                            "Podane hasła się nie zgadzają", Toast.LENGTH_LONG).show();
             return;
         }
 
 
         // create new user or register new user
-        mAuth
-                .createUserWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Rejestracja udana", Toast.LENGTH_LONG).show();
 
                             // hide the progress bar
                             progressbar.setVisibility(View.GONE);
@@ -129,16 +117,13 @@ public class RegistrationActivity extends AppCompatActivity {
                                     MainActivity.class);
                             intent.putExtra("username", username);
                             startActivity(intent);
-                        }
-                        else {
-
+                        } else {
                             // Registration failed
                             Toast.makeText(
                                             getApplicationContext(),
-                                            "Registration failed!!"
-                                                    + " Please try again later",
-                                            Toast.LENGTH_LONG)
-                                    .show();
+                                            "Rejestracja się nie udała"
+                                                    + " Spróbuj ponownie później",
+                                            Toast.LENGTH_LONG).show();
 
                             // hide the progress bar
                             progressbar.setVisibility(View.GONE);

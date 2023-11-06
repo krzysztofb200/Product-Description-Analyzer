@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_ver1</string>
+    <string name="app_name">Projekt</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -16,14 +16,14 @@
     <string name="new_shopping_list">Nowa lista zakupów</string>
     <string name="menu_promo_codes">Kody promocyjne</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="code_brand">Brand</string>
-    <string name="code">Code</string>
-    <string name="code_expires">Code expires</string>
-    <string name="code_description">Description</string>
-    <string name="code_website">Website</string>
+    <string name="code_brand">Marka</string>
+    <string name="code">Kod</string>
+    <string name="code_expires">Data ważności</string>
+    <string name="code_description">Opis</string>
+    <string name="code_website">Strona internetowa</string>
     <string name="list_detail_edit">Edytuj</string>
     <string name="link_detail">Link</string>
-    <string name="register_question">Nie masz konta? Zarejestruj się.</string>
+    <string name="register_question">Zarejestruj się.</string>
     <string name="login_question">Masz już konto? Zaloguj się.</string>
     <string name="login">Zaloguj się</string>
     <string name="register">Zarejestruj się</string>
@@ -36,6 +36,6 @@
     <string name="product_desc">Opis produktu</string>
     <string name="product_image">Zdjęcie produktu</string>
     <string name="product_link">Link produktu</string>
-    <string name="product_id">ID produktu</string>
+    <string name="product_id">Numer produktu</string>
     <string name="add_product">Dodaj produkt</string>
 </resources>
