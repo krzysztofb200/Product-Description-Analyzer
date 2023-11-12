@@ -16,10 +16,10 @@
         android:id="@+id/fabBarcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="?android:attr/actionModeFindDrawable"
-        android:layout_marginBottom="16dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"/>
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@drawable/barcode_scanner" />
 
 </FrameLayout>

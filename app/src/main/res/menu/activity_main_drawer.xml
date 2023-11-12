@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_all_products"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/shopping_basket"
             android:title="@string/menu_home" />
 <!--        <item-->
 <!--            android:id="@+id/nav_home"-->
@@ -22,12 +22,15 @@
 <!--            android:title="@string/menu_slideshow" />-->
         <item
             android:id="@+id/nav_shopping_list"
+            android:icon="@drawable/fact_check"
             android:title="@string/menu_shopping_list"/>
         <item
             android:id="@+id/nav_promo_codes"
+            android:icon="@drawable/qr_code"
             android:title="@string/menu_promo_codes"/>
         <item
             android:id="@+id/nav_add_product"
+            android:icon="@drawable/inventory"
             android:title="@string/menu_add_product"/>
     </group>
 </menu>

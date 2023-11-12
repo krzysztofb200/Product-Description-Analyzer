@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_all_products, R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_shopping_list, R.id.nav_promo_codes, R.id.nav_add_product)
-//                .setOpenableLayout(drawer)
-//                .build();
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_all_products, R.id.nav_shopping_list, R.id.nav_promo_codes, R.id.nav_add_product)
                 .setOpenableLayout(drawer)
@@ -95,13 +91,11 @@ public class MainActivity extends AppCompatActivity {
         navEmail.setText(email);
 
         // Ukrycie jednego z elementow navigation drawer
-        if(!email.equals("test@test.pl")) {
+        if(!email.equals("test@test.pl") && !email.equals("test11@test.pl")) {
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_product).setVisible(false);
         }
-
-        // TODO: Logout button, add product activity visible only for logged users, add product to favorites
     }
 
     @Override
