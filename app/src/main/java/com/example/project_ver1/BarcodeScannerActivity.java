@@ -38,12 +38,8 @@ public class BarcodeScannerActivity extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-
-        //Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
-
         barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
-                .build();
+                .setBarcodeFormats(Barcode.ALL_FORMATS).build();
 
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(1920, 1080)
@@ -54,18 +50,16 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(BarcodeScannerActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(BarcodeScannerActivity.this,
+                            Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
                     } else {
                         ActivityCompat.requestPermissions(BarcodeScannerActivity.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -81,21 +75,15 @@ public class BarcodeScannerActivity extends AppCompatActivity {
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() {
-                // Toast.makeText(getApplicationContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
-            }
+            public void release() {}
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
-
-
                     barcodeText.post(new Runnable() {
-
                         @Override
                         public void run() {
-
                             if (barcodes.valueAt(0).email != null) {
                                 barcodeText.removeCallbacks(null);
                                 barcodeData = barcodes.valueAt(0).email.address;
@@ -104,7 +92,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                                 i.putExtra("barcode", barcodeData);
                                 startActivity(i);
                             } else {
-
                                 barcodeData = barcodes.valueAt(0).displayValue;
                                 barcodeText.setText(barcodeData);
                                 Intent i = new Intent(getApplicationContext(), SearchByBarcodeActivity.class);
@@ -113,7 +100,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                             }
                         }
                     });
-
                 }
             }
         });

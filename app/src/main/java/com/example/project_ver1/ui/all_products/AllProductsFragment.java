@@ -91,7 +91,6 @@ public class AllProductsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         setHasOptionsMenu(true);
-
         fabBarcode = view.findViewById(R.id.fabBarcode);
         fabBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,16 +99,12 @@ public class AllProductsFragment extends Fragment {
                 startActivity(i);
             }
         });
-
         // Create a instance of the database and get
         // its reference
         mbase = FirebaseDatabase.getInstance().getReference().child("products");
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_all_products);
-
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         // It is a class provide by the FirebaseUI to make a
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<AllProducts> options
@@ -125,7 +120,6 @@ public class AllProductsFragment extends Fragment {
         recyclerView.setItemViewCacheSize(20);
         recyclerView.setDrawingCacheEnabled(true);
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-
     }
 
     @Override
@@ -146,7 +140,9 @@ public class AllProductsFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 FirebaseRecyclerOptions<AllProducts> options
                         = new FirebaseRecyclerOptions.Builder<AllProducts>()
-                        .setQuery(mbase.orderByChild("name").startAt(newText).endAt(newText + "\uf8ff"), AllProducts.class)
+                        .setQuery(mbase.orderByChild("name")
+                                .startAt(newText)
+                                .endAt(newText + "\uf8ff"), AllProducts.class)
                         .build();
                 adapter = new AllProductsRVAdapter(options);
                 recyclerView.setAdapter(adapter);

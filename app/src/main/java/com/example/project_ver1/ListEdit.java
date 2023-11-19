@@ -33,11 +33,11 @@ public class ListEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_edit);
-
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edytuj");
 
         Intent i = getIntent();
         id = i.getLongExtra("ID",0);
@@ -48,7 +48,6 @@ public class ListEdit extends AppCompatActivity {
         String content = shoppingList.getContent();
         nTitle = findViewById(R.id.noteTitle);
         nContent = findViewById(R.id.noteDetails);
-
         nTitle.setText(title);
         nContent.setText(content);
 
@@ -63,7 +62,8 @@ public class ListEdit extends AppCompatActivity {
         fabListSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShoppingList shoppingList = new ShoppingList(id, nTitle.getText().toString(), nContent.getText().toString(), todaysDate, currentTime);
+                ShoppingList shoppingList = new ShoppingList(id, nTitle.getText().toString(),
+                        nContent.getText().toString(), todaysDate, currentTime);
                 Log.d("EDITED", "edited: before saving id -> " + shoppingList.getID());
                 ShopListDB sDB = new ShopListDB(getApplicationContext());
                 long id = sDB.editNote(shoppingList);

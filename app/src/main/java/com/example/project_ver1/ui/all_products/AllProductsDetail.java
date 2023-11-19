@@ -22,9 +22,8 @@ import com.squareup.picasso.Picasso;
 
 public class AllProductsDetail extends AppCompatActivity {
     DatabaseReference mbase;
-    TextView name_detail, code_detail, description_detail, link_detail;
+    TextView name_detail, code_detail, description_detail;
     ImageView image_detail;
-    //String image_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +33,11 @@ public class AllProductsDetail extends AppCompatActivity {
         name_detail = findViewById(R.id.name_detail);
         code_detail = findViewById(R.id.code_detail);
         description_detail = findViewById(R.id.description_detail);
-//        link_detail = findViewById(R.id.link_detail);
         image_detail = (ImageView) findViewById(R.id.image_detail);
-//        link_detail.setMovementMethod(LinkMovementMethod.getInstance());
-
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         Intent i = getIntent();
         String id = i.getStringExtra("ID");
         Log.d("ID", "ID: " + id);
@@ -57,29 +52,23 @@ public class AllProductsDetail extends AppCompatActivity {
 
         mbase.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
 
-            // TODO: Set error condition in case any of the fields is empty
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
-                {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
                     description_detail.setText(dataSnapshot1.child("desc").getValue().toString());
-
                     String image_link = dataSnapshot1.child("image").getValue().toString();
                     Log.d("Image", "Image url: " + dataSnapshot1.child("image").getValue().toString());
                     Picasso.get().load(image_link).into(image_detail);
-
-//                    link_detail.setText(dataSnapshot1.child("link").getValue().toString());
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
 
-    // Opcja pozwalajaca cofnac sie do poprzedniego okna (wszystkie listy zakupow)
+    // Opcja pozwalajaca cofnac sie do poprzedniego okna
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

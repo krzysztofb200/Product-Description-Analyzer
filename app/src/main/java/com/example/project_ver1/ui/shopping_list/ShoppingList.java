@@ -89,7 +89,6 @@ public class ShoppingList extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-
         // Otwieranie bazy danych i pobieranie z niej wszystkich list
         db = new ShopListDB(getContext());
         lists = db.getLists();

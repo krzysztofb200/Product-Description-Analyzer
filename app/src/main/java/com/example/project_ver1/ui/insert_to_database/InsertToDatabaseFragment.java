@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.project_ver1.AddCodeActivity;
 import com.example.project_ver1.AddProductActivity;
 import com.example.project_ver1.R;
 
@@ -21,7 +22,7 @@ import com.example.project_ver1.R;
  */
 public class InsertToDatabaseFragment extends Fragment {
 
-    Button btnAddProduct;
+    Button btnAddProduct, btnAddCode;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,6 +78,15 @@ public class InsertToDatabaseFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), AddProductActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnAddCode = view.findViewById(R.id.btn2);
+        btnAddCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), AddCodeActivity.class);
                 startActivity(i);
             }
         });
