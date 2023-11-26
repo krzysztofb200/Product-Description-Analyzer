@@ -42,6 +42,7 @@
     <string name="photo">Zdjęcie</string>
     <string name="code_id">Numer okazji</string>
     <string name="add_code">Dodaj kod</string>
+    <string name="signOut">Wyloguj się</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

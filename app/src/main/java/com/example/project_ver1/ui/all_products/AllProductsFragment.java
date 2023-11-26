@@ -2,11 +2,15 @@ package com.example.project_ver1.ui.all_products;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.project_ver1.BarcodeScannerActivity;
+import com.example.project_ver1.LoginActivity;
 import com.example.project_ver1.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,7 +41,7 @@ public class AllProductsFragment extends Fragment {
      * Use the {@link com.example.project_ver1.ui.promo_codes.PromoCodesFragment#newInstance} factory method to
      * create an instance of this fragment.
      */
-
+    FirebaseAuth fbase;
     private FloatingActionButton fabBarcode;
     private RecyclerView recyclerView;
     AllProductsRVAdapter adapter; // Create Object of the Adapter class
@@ -154,6 +162,22 @@ public class AllProductsFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            signOut();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onStart()
     {
         super.onStart();
@@ -183,5 +207,11 @@ public class AllProductsFragment extends Fragment {
     {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void signOut(){
+        Intent i = new Intent(getContext(), LoginActivity.class);
+        fbase.getInstance().signOut();
+        startActivity(i);
     }
 }
