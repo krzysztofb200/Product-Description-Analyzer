@@ -2,20 +2,10 @@ package com.example.project_ver1.ui.promo_codes;
 
 public class PromoCodes {
     private String id;
-    // Variable to store data corresponding
-    // to firstname keyword in database
     private String brand;
-
-    // Variable to store data corresponding
-    // to lastname keyword in database
     private String code;
-
-    // Variable to store data corresponding
-    // to age keyword in database
     private String expires;
-
     private String image;
-
     private String desc;
 
     // Mandatory empty constructor
