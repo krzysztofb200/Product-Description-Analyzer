@@ -32,6 +32,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class AddCodeActivity extends AppCompatActivity {
@@ -108,8 +109,9 @@ public class AddCodeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(etProductDescription.getText().toString().isEmpty() || etProductName.getText().toString().isEmpty() || etProductName.getText().toString().isEmpty() || ivProductImage.getDrawable() == null){
                     Toast.makeText(AddCodeActivity.this, "Wypelnij wszystkie pola", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else if (!isDateValid(etDay.getText().toString(), etMonth.getText().toString(), etYear.getText().toString())) {
+                    Toast.makeText(AddCodeActivity.this, "Data nie jest poprawna", Toast.LENGTH_SHORT).show();
+                } else{
                     uploadPicture();
                 }
             }
@@ -231,5 +233,18 @@ public class AddCodeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static boolean isDateValid(String day, String month, String year){
+        Calendar c;
+        c = Calendar.getInstance();
+        int d = Integer.valueOf(day);
+        int m = Integer.valueOf(month);
+        int y = Integer.valueOf(year);
+        if(d <= 31 && d >= 1 && m >= 1 && m <= 12 && y >= c.get(Calendar.YEAR)){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
