@@ -74,7 +74,7 @@ public class ListEdit extends AppCompatActivity {
         });
     }
 
-    private String pad(int time) {
+    public static String pad(int time) {
         if (time < 10)
             return "0" + time;
         return String.valueOf(time);
