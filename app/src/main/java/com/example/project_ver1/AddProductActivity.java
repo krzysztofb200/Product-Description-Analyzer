@@ -143,7 +143,8 @@ public class AddProductActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AddProductActivity.this, "Nie udalo sie dodac produktu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddProductActivity.this, "Nie udalo sie dodac produktu",
+                        Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
         });
@@ -171,7 +172,7 @@ public class AddProductActivity extends AppCompatActivity {
             baos = new ByteArrayOutputStream();
 
             // here we can choose quality factor
-            // in third parameter(ex. here it is 25)
+            // in third parameter(ex. here it is 20)
             bmp.compress(Bitmap.CompressFormat.JPEG, 20, baos);
 
             byteArray = baos.toByteArray();
