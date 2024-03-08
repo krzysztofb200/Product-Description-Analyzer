@@ -23,6 +23,7 @@ Each user can create his own shopping list and use it offline whenever he wants.
 - Java
 - Firebase Realtime Database
 - Firebase Storage
+- SQLite
 
 
 ## Features
